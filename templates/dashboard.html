@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet">
+    <style>
+        /* Agregar estilo específico para el dashboard */
+        .sidebar {
+            width: 250px;
+            background-color: #2d3748;
+            color: white;
+            height: 100vh;
+            padding-top: 20px;
+            position: fixed;
+        }
+        .sidebar a {
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #4a5568;
+        }
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .card-header {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .card-body {
+            font-size: 1rem;
+            color: #4a5568;
+        }
+        .btn-primary {
+            background-color: #3182ce;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2b6cb0;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2 class="text-center text-xl text-white">Dashboard</h2>
+        <a href="#" class="text-center">Inicio</a>
+        <a href="{{ url_for('logout') }}" class="text-center">Cerrar sesión</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content flex-1">
+        <div class="text-center mt-10">
+            <h1 class="text-4xl font-bold text-gray-800">¡Bienvenido, {{ user.username }}!</h1>
+        </div>
+        
+        <!-- Card Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-header">
+                    Estadísticas del sistema
+                </div>
+                <div class="card-body">
+                    <p>Visualiza el rendimiento y actividad del sistema en tiempo real.</p>
+                    <a href="#" class="btn-primary mt-4 block text-center">Ver más</a>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-header">
+                    Gestión de usuarios
+                </div>
+                <div class="card-body">
+                    <p>Administra y controla el acceso de usuarios al sistema.</p>
+                    <a href="#" class="btn-primary mt-4 block text-center">Ver más</a>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-header">
+                    Configuración
+                </div>
+                <div class="card-body">
+                    <p>Personaliza la configuración del sistema según tus necesidades.</p>
+                    <a href="#" class="btn-primary mt-4 block text-center">Ver más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
