@@ -6,7 +6,6 @@
     <title>Dashboard</title>
     <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet">
     <style>
-        /* Agregar estilo específico para el dashboard */
         .sidebar {
             width: 250px;
             background-color: #2d3748;
@@ -60,22 +59,18 @@
     </style>
 </head>
 <body class="bg-gray-100 flex">
-    <!-- Sidebar -->
     <div class="sidebar">
         <h2 class="text-center text-xl text-white">Dashboard</h2>
         <a href="#" class="text-center">Inicio</a>
         <a href="{{ url_for('logout') }}" class="text-center">Cerrar sesión</a>
     </div>
 
-    <!-- Main Content -->
     <div class="content flex-1">
         <div class="text-center mt-10">
             <h1 class="text-4xl font-bold text-gray-800">¡Bienvenido, {{ user.username }}!</h1>
         </div>
         
-        <!-- Card Section -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-            <!-- Card 1 -->
             <div class="card">
                 <div class="card-header">
                     Estadísticas del sistema
@@ -86,7 +81,6 @@
                 </div>
             </div>
 
-            <!-- Card 2 -->
             <div class="card">
                 <div class="card-header">
                     Gestión de usuarios
@@ -97,7 +91,6 @@
                 </div>
             </div>
 
-            <!-- Card 3 -->
             <div class="card">
                 <div class="card-header">
                     Configuración
