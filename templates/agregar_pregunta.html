@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% import "_macros.html" as macros %}
+
+{% block content %}
+<div class="w-full max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
+
+    <h2 class="text-2xl font-semibold text-gray-700 text-center">Agregar Pregunta</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="mb-4">
+        {% for category, message in messages %}
+        <div class="flex items-center bg-white border border-green-500 text-green-600 text-sm font-bold px-4 py-3 rounded-md shadow-md" role="alert">
+            <svg class="w-6 h-6 mr-2 text-green-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" 
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 002 0V6zm0 6a1 1 0 10-2 0 1 1 0 002 0z" 
+                    clip-rule="evenodd">
+                </path>
+            </svg>
+            <span>{{ message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <form method="POST" novalidate>
+        {{ form.hidden_tag() }}
+        {{ macros.render_field(form.texto) }}
+        {{ macros.render_field(form.opcion_a) }}
+        {{ macros.render_field(form.opcion_b) }}
+        {{ macros.render_field(form.opcion_c) }}
+        {{ macros.render_field(form.opcion_d) }}
+        {{ macros.render_field(form.respuesta_correcta) }}
+
+        {{ macros.render_submit(form.submit) }}
+    </form>
+</div>
+{% endblock %}

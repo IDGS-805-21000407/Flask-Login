@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="w-full max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
+    <h2 class="text-2xl font-semibold text-gray-700 text-center">Realizar Examen</h2>
+
+    <p class="text-center text-gray-600">Alumno: {{ alumno.nombre }} {{ alumno.apaterno }}</p>
+    <p class="text-center text-gray-600">Grupo: {{ alumno.grupo }}</p>
+
+    <!-- Mostrar mensajes de error globales -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="space-y-4">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        <p class="text-center text-red-500">{{ message }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('guardar_examen') }}" novalidate>
+        {{ form.hidden_tag() }} <!-- Asegura el token CSRF -->
+
+        <input type="hidden" name="alumno_id" value="{{ alumno.id }}">
+
+        {% for pregunta in preguntas %}
+        <div class="mb-4">
+            <p class="text-lg font-medium text-gray-700">{{ pregunta.texto }}</p>
+            <div class="flex items-center space-x-4">
+                <label>
+                    <input type="radio" name="respuesta_{{ pregunta.id }}" value="A" class="mr-2"> {{ pregunta.opcion_a }}
+                </label>
+                <label>
+                    <input type="radio" name="respuesta_{{ pregunta.id }}" value="B" class="mr-2"> {{ pregunta.opcion_b }}
+                </label>
+                <label>
+                    <input type="radio" name="respuesta_{{ pregunta.id }}" value="C" class="mr-2"> {{ pregunta.opcion_c }}
+                </label>
+                <label>
+                    <input type="radio" name="respuesta_{{ pregunta.id }}" value="D" class="mr-2"> {{ pregunta.opcion_d }}
+                </label>
+            </div>
+            {% if pregunta.id in errores %}
+            <div class="mt-2 text-red-500 text-sm">
+                <p>¡Por favor, responde esta pregunta!</p>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <div class="text-center mt-6">
+            <button type="submit" class="px-6 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 focus:outline-none">Enviar Respuestas</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% import "_macros.html" as macros %}
+
+{% block content %}
+<div class="w-full max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
+    <h2 class="text-2xl font-semibold text-gray-700 text-center">Buscar Alumno</h2>
+
+    <form method="POST" novalidate>
+        {{ form.hidden_tag() }}
+        {{ macros.render_field(form.nombre) }}
+        {{ macros.render_field(form.apaterno) }}
+
+        {{ macros.render_submit(form.submit) }}
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% import "_macros.html" as macros %}
+
+{% block content %}
+<div class="w-full max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
+    <h2 class="text-2xl font-semibold text-gray-700 text-center">Ver Calificaciones</h2>
+
+    <form method="POST" class="mb-6">
+        {{ form.hidden_tag() }}
+        <label for="grupo" class="block text-gray-700 font-bold mb-2">Selecciona un Grupo:</label>
+        <select name="grupo" id="grupo"
+            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            {% for grupo in grupos %}
+            <option value="{{ grupo }}" {% if grupo_seleccionado == grupo %}selected{% endif %}>{{ grupo }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+            Ver Calificaciones
+        </button>
+    </form>
+
+    {% if grupo_seleccionado %}
+        {% if alumnos %}
+            <table class="w-full border-collapse border border-gray-300">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="border border-gray-300 px-4 py-2">Alumno</th>
+                        <th class="border border-gray-300 px-4 py-2">Calificación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for alumno in alumnos %}
+                    <tr class="text-center">
+                        <td class="border border-gray-300 px-4 py-2">{{ alumno.nombre }} {{ alumno.apaterno }}</td>
+                        <td class="border border-gray-300 px-4 py-2">
+                            {% if alumno.id in resultados and resultados[alumno.id] is not none %}
+                                {{ resultados[alumno.id]|round(2) }}%
+                            {% else %}
+                                No ha realizado el examen
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="text-center text-red-500 font-semibold mt-4">No hay alumnos en este grupo.</p>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}
